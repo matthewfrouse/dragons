@@ -1,0 +1,6 @@
+#AWS CLI Commands
+aws sns create-topic --name edx-ddb-monitor
+aws sns subscribe --topic-arn arn:aws:sns:us-east-1:209592945638:edx-ddb-monitor --protocol email --notification-endpoint email@address
+aws cloudwatch put-metric-alarm --alarm-name DDB-UserErrors --alarm-description "Alarm when UserErrors in DynamoDB exceeds 0" --namespace AWS/DynamoDB --metric-name UserErrors --statistic Sum --period 60 --evaluation-periods 1 --threshold 0 --comparison-operator GreaterThanThreshold --unit Count --alarm-actions arn:aws:sns:us-east-1:209592945638:edx-ddb-monitor
+aws lambda update-function-code --function-name DragonSearch --zip-file fileb://resources/steve-code.zip
+node steve_code.js test "Cassidiuma"
